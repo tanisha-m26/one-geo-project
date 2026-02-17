@@ -224,8 +224,16 @@ const WellPlot = () => {
                 <li><b>AI Confidence Score</b></li>
               </ul>
             </div>
+           
+            {/* CHATBOT */}
+            <Chatbot aiResults={aiResults} metrics={aiMetrics} />
+
+
 
           </div>
+          
+          
+          
 
           {/* RIGHT PANEL */}
           <div className="ai-right-panel">

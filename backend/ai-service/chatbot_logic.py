@@ -4,10 +4,14 @@ def answer_question(question, ai_results, metrics):
     # -----------------------
     # facies
     # -----------------------
-    if "facies" in q:
-        facies = [r for r in ai_results if r["category"] == "Facies"]
-        return f"Detected {len(facies)} facies zones. These represent different rock types."
+    # if "facies" in q:
+    #     facies = [r for r in ai_results if r["category"] == "Facies"]
+    #     return f"Detected {len(facies)} facies zones. These represent different rock types."
     
+    if "facies" in q:
+        facies = [r["interpretation"] for r in ai_results if r["category"] == "Facies"]
+        return f"Facies summary: {', '.join(facies[:3])}..."
+
     # -----------------------
     # anomaly
     # -----------------------
@@ -29,8 +33,10 @@ def answer_question(question, ai_results, metrics):
 
 
     if "accuracy" in q:
-        return f"Model accuracy is {metrics['accuracy']}% with F1 score {metrics['f1_score']}."
-
+        return f"Model accuracy is {metrics['accuracy']}%."
+    
+    if "f1" in q:
+        return f"F1 score is {metrics['f1_score']}."
     # -----------------------
     # cluster
     # -----------------------
