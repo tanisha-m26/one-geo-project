@@ -1,0 +1,37 @@
+.wellplot-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.controls label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.controls input {
+  padding: 0.3rem;
+}
+
+.ai-table-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.ai-table-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ai-table-container th,
+.ai-table-container td {
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-align: left;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}

@@ -1,0 +1,95 @@
+/* frontend/src/App.css */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #2f4f4f;
+  color: white;
+}
+
+.theme-toggle {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Main layout */
+.app-main {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+}
+
+/* Sidebar */
+.app-sidebar {
+  flex: 0 0 300px;
+  padding: 1rem;
+  background-color: #f1f1f1;
+  overflow-y: auto;
+}
+
+/* Main Content */
+.app-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+/* Footer */
+.app-footer {
+  padding: 1rem 2rem;
+  background-color: #2f4f4f;
+  color: white;
+  text-align: center;
+}
+
+/* Dark Theme */
+.dark-theme {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-theme .app-header,
+.dark-theme .app-footer {
+  background-color: #1f1f1f;
+}
+
+.dark-theme .app-sidebar {
+  background-color: #2b2b2b;
+}
+
+.dark-theme table, .dark-theme th, .dark-theme td {
+  color: white;
+  border-color: #444;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .app-main {
+    flex-direction: column;
+  }
+  .app-sidebar {
+    flex: 1;
+  }
+}
+
+.ai-toolkit {
+  background: #f7f9fc;
+  padding: 12px;
+  border-left: 4px solid #0077ff;
+  margin-top: 20px;
+  font-size: 13px;
+}
