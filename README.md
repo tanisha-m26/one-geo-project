@@ -38,7 +38,7 @@ AI / ML
 
 * Scikit-learn
 * Random Forest classifiers
-* Synthetic training pipeline
+* Training pipeline
 * Live inference
 
 ---
