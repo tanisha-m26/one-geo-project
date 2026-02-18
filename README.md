@@ -13,7 +13,8 @@ The focus is on software engineering architecture, data pipelines, and interacti
 ## Live Demo
 
 Deployment URL:
-👉 **(will be added after deployment)**
+Frontend (demo UI):
+👉 **https://one-geo-project-1.onrender.com/**
 
 Local Demo:
 Runs fully on local machine using Node + Python backend.
@@ -153,15 +154,32 @@ The chatbot uses interpretation results as context.
 
 ## Step 6 — Deployment
 
-The system is deployable as:
+The system is fully deployed using Render cloud hosting.
 
-* Frontend static app (Vercel / Netlify)
-* Node backend (Render / Railway)
-* Python AI service (Render / Docker)
+Deployment architecture:
 
-Deployment link will be added after hosting.
+*React frontend → Render Static Site
 
-If deployment is skipped, the system runs locally.
+*Node backend → Render Web Service
+
+*Python AI service → integrated inside backend container
+
+Frontend:
+https://one-geo-project-1.onrender.com
+
+CORS configured for cross-service communication.
+
+The deployed system supports:
+
+*File ingestion
+
+*Visualization APIs
+
+*AI interpretation
+
+*Chatbot interface
+
+The demo runs entirely in the cloud.
 
 ---
 
