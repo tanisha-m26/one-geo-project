@@ -63,8 +63,40 @@ def interpret(data):
 
     return {"interpretations": results, "metrics": metrics}
 
-# ---------------- CLI ENTRY ----------------
+# # ---------------- CLI ENTRY ----------------
+# if __name__ == "__main__":
+#     data = json.loads(sys.stdin.read())
+#     output = interpret(data)
+#     print(json.dumps(output))
+
 if __name__ == "__main__":
-    data = json.loads(sys.stdin.read())
-    output = interpret(data)
-    print(json.dumps(output))
+    try:
+        raw = sys.stdin.read()
+
+        if not raw.strip():
+            raise ValueError("No input received from Node")
+
+        data = json.loads(raw)
+
+        if "curves" not in data or "depthRange" not in data:
+            raise ValueError("Missing required keys")
+
+        output = interpret(data)
+
+        # ALWAYS print valid JSON
+        print(json.dumps(output))
+
+    except Exception as e:
+        # Print error to stderr (Node captures this)
+        print("Python error:", str(e), file=sys.stderr)
+
+        # Return safe JSON so Node doesn't crash
+        print(json.dumps({
+            "interpretations": [],
+            "metrics": {
+                "accuracy": 0,
+                "f1_score": 0,
+                "insights": "Python failure"
+            }
+        }))
+

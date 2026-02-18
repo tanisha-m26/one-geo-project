@@ -5,6 +5,7 @@ import axios from 'axios';
 import './WellPlot.css';
 import Chatbot from './Chatbot';
 
+const BACKEND_URL = 'https://one-geo-project.onrender.com';
 
 const WellPlot = () => {
   const [curves, setCurves] = useState([]);
@@ -18,11 +19,12 @@ const WellPlot = () => {
   const [activeStep, setActiveStep] = useState('visualization');
 
   useEffect(() => {
-    const fetchData = async () => {
-      const names = await axios.get('/api/visualization/curves');
+  const fetchData = async () => {
+    try {
+      const names = await axios.get(`${BACKEND_URL}/api/visualization/curves`);
       setCurves(names.data.curveNames.map(c => ({ value: c, label: c })));
 
-      const data = await axios.get('/api/visualization/curves-data');
+      const data = await axios.get(`${BACKEND_URL}/api/visualization/curves-data`);
       setCurveData(data.data);
 
       if (data.data['DEPT']) {
@@ -31,9 +33,14 @@ const WellPlot = () => {
           max: data.data['DEPT'][data.data['DEPT'].length - 1]
         });
       }
-    };
-    fetchData();
-  }, []);
+    } catch (err) {
+      console.error('Axios fetchData error:', err);
+    }
+  };
+  fetchData();
+}, []);
+
+
 
   const getFiltered = (curve) => {
     if (!curveData['DEPT'] || !curveData[curve]) return { x: [], y: [] };
@@ -54,7 +61,7 @@ const WellPlot = () => {
   };
 
   const runAI = async () => {
-  const res = await axios.post('/api/interpret', {
+  const res = await axios.post(`${BACKEND_URL}/api/interpret`, {
     curves: selectedCurves.map(c => c.value),
     depthRange: [depthRange.min, depthRange.max]
   });

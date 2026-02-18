@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const BACKEND_URL = 'https://one-geo-project.onrender.com';
+
 const UploadForm = () => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
@@ -20,7 +22,7 @@ const UploadForm = () => {
     formData.append('lasFile', file);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/upload', formData, {
+      const res = await axios.post(`${BACKEND_URL}/api/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setMessage(res.data.message + ' | File ID: ' + res.data.fileId);

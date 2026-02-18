@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const BACKEND_URL = 'https://one-geo-project.onrender.com';
+
 const Chatbot = ({ aiResults, metrics }) => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
   const ask = async () => {
-    const res = await axios.post('/api/chatbot', {
+    const res = await axios.post(`${BACKEND_URL}/api/chatbot`, {
       question,
       aiResults,
       metrics
