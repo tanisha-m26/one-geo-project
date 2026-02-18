@@ -27,10 +27,10 @@ const WellPlot = () => {
       const data = await axios.get(`${BACKEND_URL}/api/visualization/curves-data`);
       setCurveData(data.data);
 
-      if (data.data['DEPT']) {
+      if (data.data['Depth']) {
         setDepthRange({
-          min: data.data['DEPT'][0],
-          max: data.data['DEPT'][data.data['DEPT'].length - 1]
+          min: data.data['Depth'][0],
+          max: data.data['Depth'][data.data['Depth'].length - 1]
         });
       }
     } catch (err) {
@@ -43,9 +43,9 @@ const WellPlot = () => {
 
 
   const getFiltered = (curve) => {
-    if (!curveData['DEPT'] || !curveData[curve]) return { x: [], y: [] };
+    if (!curveData['Depth'] || !curveData[curve]) return { x: [], y: [] };
 
-    const depth = curveData['DEPT'];
+    const depth = curveData['Depth'];
     const values = curveData[curve];
 
     const filtered = depth.map((d, i) => ({ d, v: values[i] }))
@@ -111,9 +111,9 @@ const WellPlot = () => {
 
 
   const renderDepthTable = () => {
-    if (!curveData['DEPT']) return null;
+    if (!curveData['Depth']) return null;
 
-    const depth = curveData['DEPT'];
+    const depth = curveData['Depth'];
 
     return (
       <div style={{ maxHeight: '300px', overflowY: 'scroll', marginTop: '10px' }}>
@@ -170,6 +170,27 @@ const WellPlot = () => {
             value={selectedCurves}
             onChange={setSelectedCurves}
           />
+
+          <div style={{ marginTop: '10px' }}>
+            <label>Min Depth: </label>
+            <input
+              type="number"
+              value={depthRange.min || ''}
+              onChange={e =>
+                setDepthRange({ ...depthRange, min: Number(e.target.value) })
+            }
+          />
+
+          <label style={{ marginLeft: '10px' }}>Max Depth: </label>
+          <input
+            type="number"
+            value={depthRange.max || ''}
+            onChange={e =>
+              setDepthRange({ ...depthRange, max: Number(e.target.value) })
+          }
+        />
+      </div>
+
 
           <Plot
             data={selectedCurves.map(curve => {
