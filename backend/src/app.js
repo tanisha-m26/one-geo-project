@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 // CORS configuration
 app.use(cors({
   origin: [
-    'http://localhost:3000',                // local dev frontend
-    // 'https://one-geo-project.onrender.com'   // your deployed frontend URL
+    // 'http://localhost:3000',                // local dev frontend
+    'https://one-geo-project-1.onrender.com'   // your deployed frontend URL
   ],
   methods: ['GET','POST','PUT','DELETE'],
   credentials: true
