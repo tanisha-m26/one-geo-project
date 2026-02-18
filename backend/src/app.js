@@ -3,6 +3,8 @@ const cors = require('cors');
 const app = express();
 
 // Routes
+const uploadRoutes = require('./routes/uploadRoutes');
+
 const visualizationRoutes = require('./routes/visualizationRoutes');
 const aiRoutes = require('./routes/aiRoutes');
 const chatRoutes = require('./routes/chatRoutes');
@@ -25,5 +27,6 @@ app.use(cors({
 app.use('/api/visualization', visualizationRoutes);
 app.use('/api/interpret', aiRoutes);
 app.use('/api/chatbot', chatRoutes);
+app.use('/api', uploadRoutes);
 
 module.exports = app;
