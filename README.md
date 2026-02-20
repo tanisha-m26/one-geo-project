@@ -76,16 +76,57 @@ The system supports LAS file ingestion.
 Workflow:
 
 1. LAS file uploaded via UI
-2. Parsed into structured curve data
-3. Stored in backend memory/database format
-4. Curves exposed via API for visualization
+2. Original file stored in Backblaze B2 (S3-compatible object storage)
+3. Parsed into structured curve data
+4. Stored in backend memory/database format
+5. Metadata + curve data stored in MongoDB
+6. Curves exposed via API for visualization
 
 Design choice:
 
+* Backblaze B2 used instead of Amazon S3 for cost-effective, S3-compatible cloud storage
+* MongoDB chosen for flexible schema handling of variable LAS curve structures (JSON-native storage)
 * JSON curve storage optimized for fast depth lookup
 * Lightweight structure suited for real-time visualization
-* Can be extended to S3 + database persistence
+* Easily extendable for scalable cloud deployment
 
+Cloud Storage Choice — Backblaze B2 (S3-Compatible):
+Instead of Amazon S3, Backblaze B2 is used as the object storage layer.
+
+Reasoning:
+
+* Fully S3-compatible API.
+* Significantly lower cost compared to Amazon S3.
+* Suitable for student / prototype / low-volume production systems.
+* Reliable object storage with versioning support.
+* Scalable for large LAS datasets.
+
+Database Choice — MongoDB:
+MongoDB is used as the primary database.
+
+Why MongoDB?
+1. Schema Flexibility
+* LAS files vary in curve count and naming.
+* MongoDB handles variable document structures without rigid schemas.
+
+2. JSON-Native Storage
+* Parsed LAS data naturally maps to BSON/JSON.
+* No impedance mismatch like in relational databases.
+
+3. Document-Oriented Design
+* Each uploaded well can be stored as one document
+
+4. Efficient Querying
+* Fast retrieval by file ID
+* Supports indexing on metadata fields
+* Scales horizontally if needed
+
+5. Better than SQL for this use-case
+* Relational DB would require multiple normalized tables
+* Complex joins for curve reconstruction
+* Higher latency for visualization workloads
+
+MongoDB fits semi-structured scientific data very well.
 ---
 
 ## Step 3 — Visualization
